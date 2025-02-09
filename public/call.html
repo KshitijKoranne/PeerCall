@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PeerCall - Video Call</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Dancing Script and Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg" style="background-color: #3674B5;">
+    <div class="container">
+      <a class="navbar-brand text-white" href="index.html" id="navBrand" style="font-family: 'Dancing Script', cursive; font-size: 2rem;">PeerCall</a>
+      <div class="ms-auto">
+        <!-- About button now triggers an alert -->
+        <a href="#" class="btn btn-sm nav-btn" onclick="alert('This page is under construction.'); return false;">About</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Warning Modal (Bootstrap) -->
+  <div class="modal fade" id="exitModal" tabindex="-1" aria-labelledby="exitModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exitModalLabel">Exit Call?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          You are currently in a call. Navigating away will disconnect you. Do you want to continue?
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="stayBtn" class="btn btn-secondary" data-bs-dismiss="modal">Stay</button>
+          <button type="button" id="leaveBtn" class="btn btn-danger">Leave Call</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Call Page Content -->
+  <div class="container my-4">
+    <!-- Notifications -->
+    <div id="notifications"></div>
+    
+    <!-- Call Controls (Floating Bar) -->
+    <div id="callControls" class="call-controls" style="display: none;">
+      <div class="d-flex align-items-center">
+        <span class="me-2">Camera:</span>
+        <select id="cameraSelect" class="form-select form-select-sm me-3" style="width: auto;"></select>
+        <button id="toggleVideoBtn" class="btn btn-outline-secondary btn-sm me-3">Video Off</button>
+        <span class="me-2">Mic:</span>
+        <select id="micSelect" class="form-select form-select-sm me-3" style="width: auto;"></select>
+        <button id="toggleMicBtn" class="btn btn-outline-secondary btn-sm">Mic Off</button>
+        <button id="endCallBtn" class="btn btn-danger btn-sm ms-3">End Call</button>
+      </div>
+    </div>
+    
+    <!-- Videos Container -->
+    <div id="videos" class="mt-4 d-flex flex-wrap justify-content-center">
+      <!-- Local video container (without any extra "Local" text) -->
+      <div id="localContainer" class="video-container">
+        <video id="localVideo" autoplay muted class="video-box"></video>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Socket.io -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- Custom JavaScript -->
+  <script src="js/main.js"></script>
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Warn user when clicking the brand if in a call
+    const navBrand = document.getElementById('navBrand');
+    navBrand.addEventListener('click', function(event) {
+      if (document.getElementById('callControls').style.display !== "none") {
+        event.preventDefault();
+        const exitModal = new bootstrap.Modal(document.getElementById('exitModal'));
+        exitModal.show();
+      }
+    });
+    
+    document.getElementById('leaveBtn').addEventListener('click', function() {
+      endCall();
+      window.location.href = "index.html";
+    });
+    // "Stay" button automatically dismisses the modal.
+  </script>
+</body>
+</html>

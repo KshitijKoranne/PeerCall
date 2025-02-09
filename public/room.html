@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PeerCall - Choose Room</title>
+  <!-- Bootstrap CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Dancing Script and Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg" style="background-color: #3674B5;">
+    <div class="container">
+      <a class="navbar-brand text-white" href="index.html" style="font-family: 'Dancing Script', cursive;">PeerCall</a>
+      <div class="ms-auto">
+        <a href="call.html" class="btn btn-sm nav-btn me-2">Join Call</a>
+        <a href="#" class="btn btn-sm nav-btn">About</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Room Selection Content -->
+  <div class="room-selection-container d-flex align-items-center justify-content-center">
+    <div class="room-selection-content text-center">
+      <h1 class="room-title" style="font-family: 'Dancing Script', cursive;">PeerCall</h1>
+      <p class="room-tagline">Create a unique room name – anyone with the URL can join your room!</p>
+      <div class="room-selection-box card p-4">
+        <div class="mb-3">
+          <label for="roomNameInput" class="form-label">Room Name</label>
+          <input type="text" class="form-control" id="roomNameInput" placeholder="Enter room name">
+        </div>
+        <div class="d-flex justify-content-between">
+          <button id="randomizeBtn" class="btn btn-secondary">Randomize</button>
+          <button id="joinRoomBtn" class="btn btn-primary">Join Room</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Room Selection JS -->
+  <script>
+    // Arrays of allowed adjectives and nouns (no NSFW words)
+    const adjectives = ["happy", "brave", "cool", "smart", "charming", "witty"];
+    const nouns = ["lion", "eagle", "tiger", "panther", "wolf", "falcon"];
+    
+    function generateRoomName() {
+      const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+      const noun = nouns[Math.floor(Math.random() * nouns.length)];
+      return adj + "-" + noun + "-" + Math.floor(Math.random() * 1000);
+    }
+    
+    const roomNameInput = document.getElementById('roomNameInput');
+    const randomizeBtn = document.getElementById('randomizeBtn');
+    const joinRoomBtn = document.getElementById('joinRoomBtn');
+    
+    randomizeBtn.addEventListener('click', function() {
+      const roomName = generateRoomName();
+      roomNameInput.value = roomName;
+    });
+    
+    joinRoomBtn.addEventListener('click', function() {
+      const roomName = roomNameInput.value.trim();
+      if (!roomName) {
+        alert("Please enter a room name.");
+        return;
+      }
+      window.location.href = "call.html?room=" + encodeURIComponent(roomName);
+    });
+  </script>
+
+<!-- Global Footer -->
+<footer class="global-footer text-center py-2">
+    Made in 🇮🇳 India by KSK Labs.<br>
+    &copy; 2025
+  </footer>
+  
+
+</body>
+</html>
