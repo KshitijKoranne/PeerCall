@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PeerCall - Video Call</title>
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Google Fonts: Dancing Script and Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@600&display=swap" rel="stylesheet" />
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <!-- Navbar -->
@@ -17,12 +17,12 @@
     <div class="container">
       <a class="navbar-brand text-white" href="index.html" id="navBrand" style="font-family: 'Dancing Script', cursive; font-size: 2rem;">PeerCall</a>
       <div class="ms-auto">
-        <!-- About button now triggers an alert -->
+        <!-- About button triggers under construction alert -->
         <a href="#" class="btn btn-sm nav-btn" onclick="alert('This page is under construction.'); return false;">About</a>
       </div>
     </div>
   </nav>
-  
+
   <!-- Warning Modal (Bootstrap) -->
   <div class="modal fade" id="exitModal" tabindex="-1" aria-labelledby="exitModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -41,54 +41,78 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Call Page Content -->
   <div class="container my-4">
     <!-- Notifications -->
     <div id="notifications"></div>
-    
+
     <!-- Call Controls (Floating Bar) -->
     <div id="callControls" class="call-controls" style="display: none;">
-      <div class="d-flex align-items-center">
-        <span class="me-2">Camera:</span>
-        <select id="cameraSelect" class="form-select form-select-sm me-3" style="width: auto;"></select>
-        <button id="toggleVideoBtn" class="btn btn-outline-secondary btn-sm me-3">Video Off</button>
-        <span class="me-2">Mic:</span>
-        <select id="micSelect" class="form-select form-select-sm me-3" style="width: auto;"></select>
-        <button id="toggleMicBtn" class="btn btn-outline-secondary btn-sm">Mic Off</button>
-        <button id="endCallBtn" class="btn btn-danger btn-sm ms-3">End Call</button>
+      <div class="d-flex align-items-center flex-wrap">
+        <!-- Camera Dropdown & Toggle -->
+        <div class="d-flex align-items-center me-3">
+          <select id="cameraSelect" class="form-select form-select-sm me-1" style="width: auto;"></select>
+          <!-- Camera toggle icon -->
+          <button id="toggleVideoBtn" class="btn btn-outline-secondary btn-sm">
+            <!-- Inline SVG for camera icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7a2 2 0 012-2h3.28a2 2 0 011.89 1.37l.82 2.45a2 2 0 001.89 1.37H17a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </button>
+        </div>
+        <!-- Mic Dropdown & Toggle -->
+        <div class="d-flex align-items-center me-3">
+          <select id="micSelect" class="form-select form-select-sm me-1" style="width: auto;"></select>
+          <!-- Mic toggle icon -->
+          <button id="toggleMicBtn" class="btn btn-outline-secondary btn-sm">
+            <!-- Inline SVG for microphone icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1v10m0 0a3 3 0 00-3 3v4h6v-4a3 3 0 00-3-3z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 10v2a7 7 0 01-14 0v-2" />
+            </svg>
+          </button>
+        </div>
+        <!-- End Call Button -->
+        <button id="endCallBtn" class="btn btn-danger btn-sm">End Call</button>
       </div>
     </div>
-    
+
     <!-- Videos Container -->
     <div id="videos" class="mt-4 d-flex flex-wrap justify-content-center">
-      <!-- Local video container (without any extra "Local" text) -->
+      <!-- Local video container -->
       <div id="localContainer" class="video-container">
         <video id="localVideo" autoplay muted class="video-box"></video>
       </div>
     </div>
   </div>
-  
-  
+
+  <!-- Global Footer -->
+  <footer class="global-footer text-center py-2">
+    Made in 🇮🇳 India by KSK Labs.<br>
+    &copy; 2025
+  </footer>
+
   <!-- Socket.io -->
   <script src="/socket.io/socket.io.js"></script>
   <!-- Custom JavaScript -->
   <script src="js/main.js"></script>
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
+
   <script>
     // Warn user when clicking the brand if in a call
     const navBrand = document.getElementById('navBrand');
-    navBrand.addEventListener('click', function(event) {
+    navBrand.addEventListener('click', function (event) {
       if (document.getElementById('callControls').style.display !== "none") {
         event.preventDefault();
         const exitModal = new bootstrap.Modal(document.getElementById('exitModal'));
         exitModal.show();
       }
     });
-    
-    document.getElementById('leaveBtn').addEventListener('click', function() {
+
+    document.getElementById('leaveBtn').addEventListener('click', function () {
       endCall();
       window.location.href = "index.html";
     });

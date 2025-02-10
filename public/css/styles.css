@@ -173,4 +173,21 @@ body, html {
     }
   }
   
-  
+  /* Ensure call-controls are responsive */
+.call-controls {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+
+/* For mobile: reduce padding and stack elements if needed */
+@media (max-width: 576px) {
+  .call-controls .d-flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .call-controls select,
+  .call-controls button {
+    margin-bottom: 0.5rem;
+  }
+}
