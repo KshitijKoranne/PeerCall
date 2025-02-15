@@ -1,193 +1,199 @@
 /* Reset defaults */
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-  
-  /* Global Font & Background */
-  body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #578FCA; /* Landing page background */
-  }
-  
-  /* Navbar */
-  .navbar {
-    padding: 0.75rem 1rem;
-  }
-  .navbar-brand {
-    font-weight: 600;
-    font-size: 2rem; /* Increased font size */
-    cursor: pointer;
-  }
-  .nav-btn {
-    background-color: #A1E3F9;
-    color: #000;  /* Dark text */
-    border: none;
-    padding: 0.5rem 0.75rem;
-    border-radius: 20px;
-    text-decoration: none;
-    margin-left: 0.5rem;
-  }
-  .nav-btn:hover {
-    background-color: #578FCA;
-    color: #fff;
-  }
-  
-  /* Landing Page */
-  .landing-container {
-    min-height: calc(100vh - 56px);
-    padding: 110px;
-  }
-  .left-column {
-    color: #D1F8EF;
-    padding: 30px;
-  }
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Global Font & Background */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #578FCA; /* Landing page background */
+}
+
+/* Navbar */
+.navbar {
+  padding: 0.75rem 1rem;
+}
+.navbar-brand {
+  font-weight: 600;
+  font-size: 2rem; /* Increased font size */
+  cursor: pointer;
+}
+.nav-btn {
+  background-color: #A1E3F9;
+  color: #000;  /* Dark text */
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
+.nav-btn:hover {
+  background-color: #578FCA;
+  color: #fff;
+}
+
+/* Landing Page */
+.landing-container {
+  min-height: calc(100vh - 56px);
+  padding: 110px;
+}
+.left-column {
+  color: #D1F8EF;
+  padding: 30px;
+}
+.fancy-text {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #A1E3F9;
+}
+.start-call-btn {
+  background-color: #A1E3F9;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+.start-call-btn:hover {
+  background-color: #D1F8EF;
+  color: #000;
+}
+
+/* Right Column (Images) */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 500px;  /* Reduced from 600px */
+  width: 100%;
+}
+.grid-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Room Selection Page – (unchanged from previous update) */
+.room-selection-container {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #578FCA;
+  padding: 20px;
+}
+.room-selection-content {
+  max-width: 500px;
+  width: 100%;
+}
+.room-title {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #A1E3F9;
+}
+.room-tagline {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  color: #D1F8EF;
+}
+.room-selection-box {
+  background-color: #D1F8EF;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Call Page Controls */
+.call-controls {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #D1F8EF;
+  padding: 0.75rem 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: auto;
+  max-width: 950px;
+  min-width: 300px;
+  z-index: 1000;
+  left: 120px;
+}
+
+/* Make form elements rounded */
+.form-select, .btn {
+  border-radius: 10px !important;
+}
+
+/* Connection status (SVG) */
+.connection-status {
+  display: inline-block;
+  vertical-align: middle;
+  /* The SVG uses currentColor, which will be set via JS */
+}
+
+/* Video container */
+.video-box {
+  width: 300px;
+  height: 225px;
+  background: #000;
+  margin: 10px;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+.video-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Remove extra label from local video container */
+#localContainer .connection-status {
+  display: none;
+}
+
+/* Notifications */
+#notifications {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 1050;
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 768px) {
   .fancy-text {
-    font-size: 3rem;
-    font-weight: 600;
-    color: #A1E3F9;
+    font-size: 2rem;
   }
   .start-call-btn {
-    background-color: #A1E3F9;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 30px;
-    color: #fff;
-    font-size: 1.25rem;
-    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
   }
-  .start-call-btn:hover {
-    background-color: #D1F8EF;
-    color: #000;
-  }
-  
-  /* Right Column (Images) */
   .grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    max-width: 500px;  /* Reduced from 600px */
-    width: 100%;
+    max-width: 100%;
   }
-  .grid-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  /* Room Selection Page – (unchanged from previous update) */
-  .room-selection-container {
-    min-height: calc(100vh - 56px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #578FCA;
-    padding: 20px;
-  }
-  .room-selection-content {
-    max-width: 500px;
-    width: 100%;
-  }
-  .room-title {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    color: #A1E3F9;
-  }
-  .room-tagline {
-    font-size: 1.25rem;
-    margin-bottom: 20px;
-    color: #D1F8EF;
-  }
-  .room-selection-box {
-    background-color: #D1F8EF;
-    border: none;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  /* Call Page Controls */
-  .call-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #D1F8EF;
-    padding: 0.75rem 1.5rem;
-    border-radius: 16px;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Make form elements rounded */
-  .form-select, .btn {
-    border-radius: 10px !important;
-  }
-  
-  /* Connection status (SVG) */
-  .connection-status {
-    display: inline-block;
-    vertical-align: middle;
-    /* The SVG uses currentColor, which will be set via JS */
-  }
-  
-  /* Video container */
-  .video-box {
-    width: 300px;
-    height: 225px;
-    background: #000;
-    margin: 10px;
-    border: 2px solid #333;
-    border-radius: 8px;
-  }
-  .video-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Remove extra label from local video container */
-  #localContainer .connection-status {
-    display: none;
-  }
-  
-  /* Notifications */
-  #notifications {
-    position: fixed;
-    top: 70px;
-    right: 20px;
-    z-index: 1050;
-  }
-  
-  /* Mobile-friendly adjustments */
-  @media (max-width: 768px) {
-    .fancy-text {
-      font-size: 2rem;
-    }
-    .start-call-btn {
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-    }
-    .grid-container {
-      max-width: 100%;
-    }
-  }
-  
-  /* Ensure call-controls are responsive */
+}
+
+/* Ensure call-controls are responsive */
 .call-controls {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  box-sizing: border-box;
+width: 100%;
+padding: 0.5rem 1rem;
+box-sizing: border-box;
 }
 
 /* For mobile: reduce padding and stack elements if needed */
 @media (max-width: 576px) {
-  .call-controls .d-flex {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .call-controls select,
-  .call-controls button {
-    margin-bottom: 0.5rem;
-  }
+.call-controls .d-flex {
+  flex-direction: column;
+  align-items: stretch;
+}
+.call-controls select,
+.call-controls button {
+  margin-bottom: 0.5rem;
+}
 }
