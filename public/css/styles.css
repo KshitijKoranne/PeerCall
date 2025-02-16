@@ -77,7 +77,7 @@ body {
   border-radius: 8px;
 }
 
-/* Room Selection Page – (unchanged from previous update) */
+/* Room Selection Page */
 .room-selection-container {
   min-height: calc(100vh - 56px);
   display: flex;
@@ -108,22 +108,52 @@ body {
   padding: 20px;
 }
 
-/* Call Page Controls */
+/* Floating Bar (Call Controls) */
 .call-controls {
-  display: flex;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
+  position: absolute;
+  top: 90px; /* Ensures it stays below the navbar */
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #D1F8EF;
-  padding: 0.75rem 1.5rem;
-  border-radius: 16px;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
   width: auto;
-  max-width: 950px;
+  max-width: 900px;
   min-width: 300px;
   z-index: 1000;
-  left: 120px;
+}
+
+/* Fix for mobile: Make sure floating bar is properly centered */
+@media (max-width: 768px) {
+  .call-controls {
+    width: 90%;
+    max-width: 90%;
+    flex-direction: row;
+    top: 80px; /* Keeps it visible on mobile */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* Fix for very small screens */
+@media (max-width: 576px) {
+  .call-controls {
+    flex-direction: column; /* Stack buttons vertically on mobile */
+    align-items: center;
+    width: 95%;
+    max-width: 400px;
+    padding: 8px 10px;
+  }
+  .call-controls select,
+  .call-controls button {
+    width: 90%; /* Ensure buttons don't overflow */
+    margin-bottom: 0.5rem;
+  }
 }
 
 /* Make form elements rounded */
@@ -158,6 +188,18 @@ body {
   z-index: 1050;
 }
 
+/* Ensure call-controls are responsive */
+.call-controls {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+
+/* Ensure video doesn't overlap Floating Bar */
+#videos {
+  margin-top: 140px; /* Prevents overlap */
+}
+
 /* Mobile-friendly adjustments */
 @media (max-width: 768px) {
   .fancy-text {
@@ -172,21 +214,14 @@ body {
   }
 }
 
-/* Ensure call-controls are responsive */
-.call-controls {
-width: 100%;
-padding: 0.5rem 1rem;
-box-sizing: border-box;
-}
-
 /* For mobile: reduce padding and stack elements if needed */
 @media (max-width: 576px) {
-.call-controls .d-flex {
-  flex-direction: column;
-  align-items: stretch;
-}
-.call-controls select,
-.call-controls button {
-  margin-bottom: 0.5rem;
-}
+  .call-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .call-controls select,
+  .call-controls button {
+    margin-bottom: 0.5rem;
+  }
 }
