@@ -75,13 +75,20 @@ async function populateDeviceLists() {
 async function getLocalStream() {
   try {
       localStream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "user" }, // Ensures mobile uses front camera
+          video: { facingMode: "user" }, // Ensures front camera use on mobile
           audio: true
       });
 
-      localVideo.srcObject = localStream;
-      localVideo.muted = true;  // Ensures autoplay works on mobile
-      localVideo.play();  // Forces video to start playing
+      // Assign the stream after a delay to ensure Safari attaches it
+      setTimeout(() => {
+          localVideo.srcObject = localStream;
+          localVideo.muted = true;  // Autoplay fix
+          localVideo.setAttribute("playsinline", ""); // iOS Safari fix
+
+          // ✅ Force Safari to recognize video stream
+          localVideo.play().catch(error => console.error("Safari Autoplay Blocked:", error));
+
+      }, 500); // Small delay for Safari compatibility
 
       // Disable video/mic initially
       localStream.getTracks().forEach(track => track.enabled = false);
@@ -89,6 +96,8 @@ async function getLocalStream() {
       micEnabled = false;
       toggleVideoBtn.textContent = "Turn Video On";
       toggleMicBtn.textContent = "Turn Mic On";
+      
+      console.log("Local stream initialized.");
   } catch (err) {
       console.error("Error accessing media devices.", err);
       alert("Could not access your camera and microphone. Please check browser permissions.");
