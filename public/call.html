@@ -14,14 +14,34 @@
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg" style="background-color: #3674B5;">
-    <div class="container">
-      <a class="navbar-brand text-white" href="index.html" id="navBrand" style="font-family: 'Dancing Script', cursive; font-size: 2rem;">PeerCall</a>
-      <div class="ms-auto">
-        <!-- About button triggers under construction alert -->
-        <a href="#" class="btn btn-sm nav-btn" onclick="alert('This page is under construction.'); return false;">About</a>
-      </div>
+    <div class="container d-flex justify-content-between">
+        <a class="navbar-brand text-white" href="index.html" id="navBrand" style="font-family: 'Dancing Script', cursive; font-size: 2rem;">PeerCall</a>
+
+        <div class="d-flex align-items-center">
+            <!-- Camera Toggle Button -->
+            <button id="toggleVideoBtn" class="btn btn-outline-light me-2" title="Toggle Camera">
+                <svg id="videoIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-camera-video" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5zm15.5-1.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5 1.5 1.5 0 0 1-1.5-1.5V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+                </svg>
+            </button>
+
+            <!-- Mic Toggle Button -->
+            <button id="toggleMicBtn" class="btn btn-outline-light me-2" title="Toggle Mic">
+                <svg id="micIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V4a3 3 0 0 1 3-3z"/>
+                    <path fill-rule="evenodd" d="M5 10.5a4 4 0 1 0 6 0V4a4 4 0 1 0-6 0v6.5z"/>
+                </svg>
+            </button>
+
+            <!-- End Call Button -->
+            <button id="endCallBtn" class="btn btn-danger" title="End Call">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-telephone-x" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.885 6.56a10.14 10.14 0 0 1 3.04-.872c.92-.102 1.752.084 2.446.496.694.412 1.168 1.02 1.408 1.744.24.724.273 1.492.097 2.292-.176.8-.52 1.52-1.016 2.144a2.502 2.502 0 0 1-1.698.992c-.703.11-1.4.065-2.064-.168a10.48 10.48 0 0 1-3.04-.872 1.5 1.5 0 0 1-.832-1.344v-2.4c0-.56.304-1.08.832-1.344z"/>
+                </svg>
+            </button>
+        </div>
     </div>
-  </nav>
+</nav>
 
   <!-- Warning Modal (Bootstrap) -->
   <div class="modal fade" id="exitModal" tabindex="-1" aria-labelledby="exitModalLabel" aria-hidden="true">
