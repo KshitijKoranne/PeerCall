@@ -71,21 +71,27 @@ async function populateDeviceLists() {
 }
 
 // getLocalStream: Request media; then immediately disable all tracks so that video/mic are off by default.
+// Request permissions & set up local video
 async function getLocalStream() {
   try {
-    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-    localVideo.srcObject = localStream;
-    // Disable all tracks by default.
-    localStream.getTracks().forEach(track => {
-      track.enabled = false;
-    });
-    videoEnabled = false;
-    micEnabled = false;
-    toggleVideoBtn.textContent = "Turn Video On";
-    toggleMicBtn.textContent = "Turn Mic On";
+      localStream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "user" }, // Ensures mobile uses front camera
+          audio: true
+      });
+
+      localVideo.srcObject = localStream;
+      localVideo.muted = true;  // Ensures autoplay works on mobile
+      localVideo.play();  // Forces video to start playing
+
+      // Disable video/mic initially
+      localStream.getTracks().forEach(track => track.enabled = false);
+      videoEnabled = false;
+      micEnabled = false;
+      toggleVideoBtn.textContent = "Turn Video On";
+      toggleMicBtn.textContent = "Turn Mic On";
   } catch (err) {
-    console.error("Error accessing media devices.", err);
-    alert("Could not access your camera and microphone.");
+      console.error("Error accessing media devices.", err);
+      alert("Could not access your camera and microphone. Please check browser permissions.");
   }
 }
 
@@ -159,39 +165,6 @@ function createPeerConnection(peerId) {
   };
   return pc;
 }
-
-// ---------- Global Connection Quality Indicator ----------
-async function updateGlobalConnectionQuality() {
-  let rtts = [];
-  for (const peerId in peers) {
-    const pc = peers[peerId];
-    try {
-      const stats = await pc.getStats(null);
-      stats.forEach(report => {
-        if (report.type === 'candidate-pair' && report.currentRoundTripTime) {
-          rtts.push(report.currentRoundTripTime);
-        }
-      });
-    } catch (err) {
-      console.error(`Error updating stats for peer ${peerId}:`, err);
-    }
-  }
-  if (rtts.length === 0) {
-    globalConnectionStatus.style.color = "gray";
-  } else {
-    const maxRtt = Math.max(...rtts);
-    if (maxRtt < 0.1) {
-      globalConnectionStatus.style.color = "green";
-    } else if (maxRtt < 0.3) {
-      globalConnectionStatus.style.color = "blue";
-    } else if (maxRtt < 0.5) {
-      globalConnectionStatus.style.color = "orange";
-    } else {
-      globalConnectionStatus.style.color = "red";
-    }
-  }
-}
-setInterval(updateGlobalConnectionQuality, 5000);
 
 // ---------- Socket.io Event Handlers ----------
 socket.on('user-joined', async (peerId) => {

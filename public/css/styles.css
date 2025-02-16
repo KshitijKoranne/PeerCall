@@ -131,13 +131,6 @@ body {
   border-radius: 10px !important;
 }
 
-/* Connection status (SVG) */
-.connection-status {
-  display: inline-block;
-  vertical-align: middle;
-  /* The SVG uses currentColor, which will be set via JS */
-}
-
 /* Video container */
 .video-box {
   width: 300px;
